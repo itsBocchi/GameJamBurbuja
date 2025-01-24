@@ -7,7 +7,10 @@ public class PlayerMovement : MonoBehaviour
 {
     // Private variables
     [SerializeField] private Vector2 speedVector;
+    [SerializeField] private Vector2 momentum;
     [SerializeField] private Vector2 deltaSpeedVector = Vector2.zero;
+    [SerializeField] private PlayerAnimator animator;
+
     [SerializeField] private float speed = 4f;
     private Rigidbody2D rb;
     private float inputX;
@@ -15,6 +18,9 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private bool grounded = false;
     private float xMovement;
     private float yMovement;
+
+    //airborne = momentum + horizontal movement
+    //grounded = external forces + horizontal + vertical
 
     void Awake()
     {
@@ -32,6 +38,18 @@ public class PlayerMovement : MonoBehaviour
         inputX = Input.GetAxisRaw("Horizontal");
         if (grounded)
         {
+            switch (inputX)
+            {
+                case > 0:
+                    animator.Walk(PlayerAnimator.Direction.Right);
+                    break;
+                case < 0:
+                    animator.Walk(PlayerAnimator.Direction.Left);
+                    break;
+                default:
+                    animator.Idle();
+                    break;
+            }
             return inputX * speed;
         }
         else
@@ -49,13 +67,17 @@ public class PlayerMovement : MonoBehaviour
     float VerticalMovement()
     {
         inputJump = Input.GetAxisRaw("Jump");
-        if (inputJump > 0)
+        if (inputJump > 0 && grounded)
         {
             return Physics2D.gravity.y * -0.5f;
         }
-        else
+        else if (grounded)
         {
             return 0f;
+        }
+        else
+        {
+            return rb.velocity.y;
         }
     }
 
@@ -97,14 +119,15 @@ public class PlayerMovement : MonoBehaviour
     /// </summary>
     void FixedUpdate()
     {
-        speedVector = rb.velocity;
-
         xMovement = HorizontalMovement();
+        yMovement = VerticalMovement();
         if (grounded)
         {
-            yMovement = VerticalMovement();
-            speedVector = new Vector2(xMovement, yMovement);
-            rb.velocity = speedVector + deltaSpeedVector;
+            deltaSpeedVector = Vector2.zero;
+        }
+        else
+        {
+            momentum = deltaSpeedVector;
         }
 
         // Applies and resets the vector of speed
