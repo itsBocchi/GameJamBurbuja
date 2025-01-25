@@ -1,30 +1,33 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    // Private variables
-    [SerializeField] private Vector2 speedVector;
-    [SerializeField] private Vector2 momentum;
-    [SerializeField] private Vector2 deltaSpeedVector = Vector2.zero;
-    [SerializeField] private PlayerAnimator animator;
-
+    // Tweakable variables
     [SerializeField] private float speed = 4f;
+    [SerializeField] private float jumpHeight = 0.5f;
+    [SerializeField] private float airborneAcceleration = 0.01f;
+    [SerializeField] private bool acceleratedAirborneMovement = false;
+    [SerializeField] private bool activateMomentum = false;
+
+    // Private variables
+    private PlayerAnimator animator;
     private Rigidbody2D rb;
+
+    private Vector2 speedVector;
+    private Vector2 momentum;
+    private Vector2 externalSpeedVector = Vector2.zero;
+    
     private float inputX;
     private float inputJump;
-    [SerializeField] private bool grounded = false;
     private float xMovement;
     private float yMovement;
-
-    //airborne = momentum + horizontal movement
-    //grounded = external forces + horizontal + vertical
+    private bool grounded = false;
+    private bool jumped = false;
 
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        animator = GetComponent<PlayerAnimator>();
     }
 
     /// <summary>
@@ -36,8 +39,8 @@ public class PlayerMovement : MonoBehaviour
     float HorizontalMovement()
     {
         inputX = Input.GetAxisRaw("Horizontal");
-        if (grounded)
-        {
+        if (grounded || !activateMomentum)
+        {   // Movement is only based on horizontal input
             switch (inputX)
             {
                 case > 0:
@@ -52,9 +55,20 @@ public class PlayerMovement : MonoBehaviour
             }
             return inputX * speed;
         }
+        
         else
-        {
-            return inputX * speed * 0.5f;
+        {   // Movement is based on momentum and input
+            if (acceleratedAirborneMovement)
+            {
+                // Input translates into acceleration
+                momentum.x += inputX * speed * airborneAcceleration;
+                return momentum.x;
+            }
+            else
+            {
+                // Input translates into speed
+                return momentum.x + inputX * speed;
+            }
         }
     }
 
@@ -67,11 +81,15 @@ public class PlayerMovement : MonoBehaviour
     float VerticalMovement()
     {
         inputJump = Input.GetAxisRaw("Jump");
-        if (inputJump > 0 && grounded)
+        if (inputJump > 0 && !jumped)
         {
-            return Physics2D.gravity.y * -0.5f;
+            jumped = true;
         }
-        else if (grounded)
+        if (grounded && jumped)
+        {
+            return Physics2D.gravity.y * -jumpHeight;
+        }
+        else if (grounded && !jumped)
         {
             return 0f;
         }
@@ -102,7 +120,7 @@ public class PlayerMovement : MonoBehaviour
     /// <returns></returns>
     public void ExternalMovement(Vector2 addedSpeed)
     {
-        deltaSpeedVector += addedSpeed;
+        externalSpeedVector += addedSpeed;
     }
 
     // WIP
@@ -121,18 +139,12 @@ public class PlayerMovement : MonoBehaviour
     {
         xMovement = HorizontalMovement();
         yMovement = VerticalMovement();
-        if (grounded)
-        {
-            deltaSpeedVector = Vector2.zero;
-        }
-        else
-        {
-            momentum = deltaSpeedVector;
-        }
+        speedVector = new Vector2(xMovement, yMovement);
 
         // Applies and resets the vector of speed
-        deltaSpeedVector = Vector2.zero;
-        rb.velocity = speedVector;
+        rb.velocity = speedVector + externalSpeedVector;
+        externalSpeedVector = Vector2.zero;
+        
     }
 
     /// <summary>
@@ -152,6 +164,14 @@ public class PlayerMovement : MonoBehaviour
     /// <param name="n_speed">New speed multiplier.</param>
     public void ChangeGrounded(bool n_grounded)
     {
+        if (!n_grounded)
+        {
+            momentum = rb.velocity;
+        }
+        else
+        {
+            jumped = false;
+        }
         grounded = n_grounded;
     }
 }
