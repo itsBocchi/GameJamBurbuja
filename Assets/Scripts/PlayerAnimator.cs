@@ -10,6 +10,11 @@ public class PlayerAnimator : MonoBehaviour
         Right = 1
     }
 
+    public void SetBool(string name, bool value)
+    {
+        animator.SetBool(name, value);
+    }
+
     public void Idle()
     {
         animator.SetTrigger("Idle");
@@ -52,6 +57,6 @@ public class PlayerAnimator : MonoBehaviour
 
     public void Sex()
     {
-
+        // lol
     }
 }

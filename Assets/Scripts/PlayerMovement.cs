@@ -176,10 +176,12 @@ public class PlayerMovement : MonoBehaviour
         if (!n_grounded)
         {
             momentum = rb.velocity;
+            animator.SetBool("TouchingGround", false); // Remove TouchingGround
         }
         else
         {
             jumped = false;
+            animator.SetBool("TouchingGround", true); // Set TouchingGround
         }
         grounded = n_grounded;
     }
