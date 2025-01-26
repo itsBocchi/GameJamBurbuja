@@ -226,6 +226,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53f2d2c7482b76e48a47d4e6c6eb2c71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shooter: {fileID: 2482196314748809036}
+  projectilePrefab: {fileID: 618559050853359027, guid: f2faf271f1aebdb45a02a06292f4bc0b, type: 3}
 --- !u!1 &4227036733537021314
 GameObject:
   m_ObjectHideFlags: 0
@@ -319,7 +321,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.25}
+  m_Offset: {x: 0, y: -0.5}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
