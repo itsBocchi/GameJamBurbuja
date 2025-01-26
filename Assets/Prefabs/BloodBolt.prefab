@@ -74,8 +74,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 955799291
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 5031187, guid: 6f5758c19da4f454b962fa2e8e134b44, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -124,7 +124,7 @@ MonoBehaviour:
   baseSpeed: 8
   bubblePrefab: {fileID: 3932207220676118023, guid: 974c964f9b3f80545b4a0c9c47477478, type: 3}
   homingSpeedFactor: 1
-  homing: 0
+  homingPlayer: 0
 --- !u!50 &2610101179203928675
 Rigidbody2D:
   serializedVersion: 4
