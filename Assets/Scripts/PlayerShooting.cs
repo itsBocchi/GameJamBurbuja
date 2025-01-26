@@ -12,12 +12,14 @@ public class PlayerShooting : MonoBehaviour
     private float angle;
     private bool canShoot = true;
     private BubbleInteract bubble = null;
+    private Animator animator;
 
     // Singleton instance
     [HideInInspector] public static PlayerShooting Instance;
 
     void Awake()
     {
+        animator = GetComponent<Animator>();
         if (Instance == null) Instance = this;
     }
 
@@ -43,6 +45,7 @@ public class PlayerShooting : MonoBehaviour
             projectile = Instantiate(projectilePrefab, shooter.transform.position, rotate).GetComponent<Projectile>();
             shooting = true;
             canShoot = false;
+            animator.SetTrigger("Shoot");
         }
     }
 
