@@ -79,7 +79,7 @@ public class PlayerMovement : MonoBehaviour
             {
                 animator.Walk();
             }
-            else
+            else if (grounded)
             {
                 animator.Idle();
             }

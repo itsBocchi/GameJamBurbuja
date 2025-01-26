@@ -24,6 +24,7 @@ public class PlayerAnimator : MonoBehaviour
     public void Walk()
     {
         animator.SetTrigger("Walk");
+        animator.SetBool("Fall", false);
     }
 
     public void Shoot()
