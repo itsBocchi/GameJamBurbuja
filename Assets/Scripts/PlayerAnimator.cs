@@ -29,4 +29,29 @@ public class PlayerAnimator : MonoBehaviour
                 break;
         }
     }
+
+    public void Shoot(Direction dir)
+    {
+        switch (dir)
+        {
+            case Direction.Left:
+                animator.SetTrigger("ShootL");
+                break;
+            case Direction.Right:
+                animator.SetTrigger("ShootR");
+                break;
+            default:
+                break;
+        }
+    }
+
+    public void Jump()
+    {
+        animator.SetTrigger("Jump");
+    }
+
+    public void Sex()
+    {
+
+    }
 }

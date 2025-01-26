@@ -41,17 +41,20 @@ public class PlayerMovement : MonoBehaviour
         inputX = Input.GetAxisRaw("Horizontal");
         if (grounded || !activateMomentum)
         {   // Movement is only based on horizontal input
-            switch (inputX)
+            if (!jumped)
             {
-                case > 0:
-                    animator.Walk(PlayerAnimator.Direction.Right);
-                    break;
-                case < 0:
-                    animator.Walk(PlayerAnimator.Direction.Left);
-                    break;
-                default:
-                    animator.Idle();
-                    break;
+                switch (inputX)
+                {
+                    case > 0:
+                        animator.Walk(PlayerAnimator.Direction.Right);
+                        break;
+                    case < 0:
+                        animator.Walk(PlayerAnimator.Direction.Left);
+                        break;
+                    default:
+                        animator.Idle();
+                        break;
+                }
             }
             return inputX * speed;
         }
@@ -84,6 +87,7 @@ public class PlayerMovement : MonoBehaviour
         if (inputJump > 0 && !jumped)
         {
             jumped = true;
+            animator.Jump();
         }
         if (grounded && jumped)
         {
