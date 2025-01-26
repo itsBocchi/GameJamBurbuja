@@ -38,7 +38,6 @@ public class PlayerMovement : MonoBehaviour
     /// <returns>Vertical speed</returns>
     float HorizontalMovement()
     {
-        inputX = Input.GetAxisRaw("Horizontal");
         if (grounded || !activateMomentum)
         {   // Movement is only based on horizontal input
             switch (inputX)
@@ -80,7 +79,6 @@ public class PlayerMovement : MonoBehaviour
     /// <returns>Vertical speed</returns>
     float VerticalMovement()
     {
-        inputJump = Input.GetAxisRaw("Jump");
         if (inputJump > 0 && !jumped)
         {
             jumped = true;
@@ -135,6 +133,13 @@ public class PlayerMovement : MonoBehaviour
     /// execute first.<br></br><br></br>
     /// Delay done in Project Settings -> Script Execution Order
     /// </summary>
+
+    void Update()
+    {
+        inputJump = Input.GetAxisRaw("Jump");
+        inputX = Input.GetAxisRaw("Horizontal");
+    }
+
     void FixedUpdate()
     {
         xMovement = HorizontalMovement();
