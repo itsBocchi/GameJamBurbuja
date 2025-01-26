@@ -55,4 +55,9 @@ public class PlayerShooting : MonoBehaviour
     {
         bubble = n_bubble;
     }
+
+    public void ProjectileHit()
+    {
+        shooting = false;
+    }
 }
