@@ -132,11 +132,17 @@ public class PlayerMovement : MonoBehaviour
     /// execute first.<br></br><br></br>
     /// Delay done in Project Settings -> Script Execution Order
     /// </summary>
-    void FixedUpdate()
+
+    void Update()
     {
         yMovement = VerticalMovement();
         xMovement = HorizontalMovement();
-        
+        yMovement = VerticalMovement();
+        inputJump = Input.GetAxisRaw("Jump");
+    }
+
+    void FixedUpdate()
+    {
         speedVector = new Vector2(xMovement, yMovement);
 
         // Applies and resets the vector of speed
