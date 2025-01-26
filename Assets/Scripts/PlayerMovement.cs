@@ -169,7 +169,11 @@ public class PlayerMovement : MonoBehaviour
         if (n_grounded)
         {
             jumped = false;
-            animator.Idle();
+            animator.SetBool("TouchingGround", true);
+        }
+        else
+        {
+            animator.SetBool("TouchingGround", false);
         }
         grounded = n_grounded;
     }
