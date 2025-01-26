@@ -5,24 +5,20 @@ public class PlayerMovement : MonoBehaviour
     // Tweakable variables
     [SerializeField] private float speed = 4f;
     [SerializeField] private float jumpHeight = 0.5f;
-    [SerializeField] private float airborneAcceleration = 0.01f;
-    [SerializeField] private bool acceleratedAirborneMovement = false;
-    [SerializeField] private bool activateMomentum = false;
 
     // Private variables
-    private PlayerAnimator animator;
-    private Rigidbody2D rb;
+    [SerializeField] private PlayerAnimator animator;
+    [SerializeField] private Rigidbody2D rb;
 
-    private Vector2 speedVector;
-    private Vector2 momentum;
-    private Vector2 externalSpeedVector = Vector2.zero;
-    
-    private float inputX;
-    private float inputJump;
-    private float xMovement;
-    private float yMovement;
-    private bool grounded = false;
-    private bool jumped = false;
+    [SerializeField] private Vector2 speedVector;
+    [SerializeField] private Vector2 externalSpeedVector = Vector2.zero;
+
+    [SerializeField] private float inputX;
+    [SerializeField] private float inputJump;
+    [SerializeField] private float xMovement;
+    [SerializeField] private float yMovement;
+    [SerializeField] private bool grounded = false;
+    [SerializeField] private bool jumped = false;
 
     // Singleton instance
     [HideInInspector] public static PlayerMovement Instance;
@@ -168,11 +164,7 @@ public class PlayerMovement : MonoBehaviour
     /// <param name="n_speed">New speed multiplier.</param>
     public void ChangeGrounded(bool n_grounded)
     {
-        if (!n_grounded)
-        {
-            momentum = rb.velocity;
-        }
-        else
+        if (n_grounded)
         {
             jumped = false;
             animator.Idle();
