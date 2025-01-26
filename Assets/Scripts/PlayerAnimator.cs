@@ -18,6 +18,7 @@ public class PlayerAnimator : MonoBehaviour
     public void Idle()
     {
         animator.SetTrigger("Idle");
+        animator.SetBool("Fall", false);
     }
 
     public void Walk()
@@ -33,6 +34,12 @@ public class PlayerAnimator : MonoBehaviour
     public void Jump()
     {
         animator.SetTrigger("Jump");
+        animator.SetBool("Fall", false);
+    }
+
+    public void Fall()
+    {
+        animator.SetBool("Fall", true);
     }
 
     public void DirectionCheck(Direction dir)
