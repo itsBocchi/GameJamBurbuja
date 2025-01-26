@@ -54,5 +54,16 @@ public class Projectile : MonoBehaviour
             PlayerShooting.Instance.RestoreBlood();
             Destroy(gameObject);
         }
+        else if (!homingPlayer && collision.gameObject.tag == "Platform")
+        {
+            PlayerShooting.Instance.ProjectileHit();
+            Expand();
+        }
+        else if (!homingPlayer && collision.gameObject.tag == "Bubblable")
+        {
+            PlayerShooting.Instance.ProjectileHit();
+            collision.gameObject.GetComponent<BubbleInteractable>().BubbleInteraction();
+            Destroy(gameObject);
+        }
     }
 }
