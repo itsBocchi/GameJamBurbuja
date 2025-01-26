@@ -15,34 +15,14 @@ public class PlayerAnimator : MonoBehaviour
         animator.SetTrigger("Idle");
     }
 
-    public void Walk(Direction dir)
+    public void Walk()
     {
-        switch (dir)
-        {
-            case Direction.Left:
-                animator.SetTrigger("WalkL");
-                break;
-            case Direction.Right:
-                animator.SetTrigger("WalkR");
-                break;
-            default:
-                break;
-        }
+        animator.SetTrigger("Walk");
     }
 
-    public void Shoot(Direction dir)
+    public void Shoot()
     {
-        switch (dir)
-        {
-            case Direction.Left:
-                animator.SetTrigger("ShootL");
-                break;
-            case Direction.Right:
-                animator.SetTrigger("ShootR");
-                break;
-            default:
-                break;
-        }
+        animator.SetTrigger("Shoot");
     }
 
     public void Jump()
@@ -50,8 +30,18 @@ public class PlayerAnimator : MonoBehaviour
         animator.SetTrigger("Jump");
     }
 
-    public void Sex()
+    public void DirectionCheck(Direction dir)
     {
-
+        switch (dir)
+        {
+            case Direction.Left:
+                animator.SetTrigger("Left");
+                break;
+            case Direction.Right:
+                animator.SetTrigger("Right");
+                break;
+            default:
+                break;
+        }
     }
 }

@@ -24,8 +24,12 @@ public class PlayerMovement : MonoBehaviour
     private bool grounded = false;
     private bool jumped = false;
 
+    // Singleton instance
+    [HideInInspector] public static PlayerMovement Instance;
+
     void Awake()
     {
+        if (Instance == null) Instance = this;
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<PlayerAnimator>();
     }
@@ -33,52 +37,6 @@ public class PlayerMovement : MonoBehaviour
     /// <summary>
     /// Method that determines the vertical speed of the
     /// character.
-    /// Speed is reduced when airborne.
-    /// </summary>
-    /// <returns>Vertical speed</returns>
-    float HorizontalMovement()
-    {
-        inputX = Input.GetAxisRaw("Horizontal");
-        if (grounded || !activateMomentum)
-        {   // Movement is only based on horizontal input
-            if (!jumped)
-            {
-                switch (inputX)
-                {
-                    case > 0:
-                        animator.Walk(PlayerAnimator.Direction.Right);
-                        break;
-                    case < 0:
-                        animator.Walk(PlayerAnimator.Direction.Left);
-                        break;
-                    default:
-                        animator.Idle();
-                        break;
-                }
-            }
-            return inputX * speed;
-        }
-        
-        else
-        {   // Movement is based on momentum and input
-            if (acceleratedAirborneMovement)
-            {
-                // Input translates into acceleration
-                momentum.x += inputX * speed * airborneAcceleration;
-                return momentum.x;
-            }
-            else
-            {
-                // Input translates into speed
-                return momentum.x + inputX * speed;
-            }
-        }
-    }
-
-    /// <summary>
-    /// Method that determines the vertical speed of the
-    /// character.
-    /// Only called when the character is grounded.
     /// </summary>
     /// <returns>Vertical speed</returns>
     float VerticalMovement()
@@ -101,6 +59,41 @@ public class PlayerMovement : MonoBehaviour
         {
             return rb.velocity.y;
         }
+    }
+
+    /// <summary>
+    /// Method that determines the horizontal speed of the
+    /// character.
+    /// </summary>
+    /// <returns>Horizontal speed</returns>
+    float HorizontalMovement()
+    {
+        inputX = Input.GetAxisRaw("Horizontal");
+        if (grounded && !jumped)
+        {   // Determine animation from input
+            if (Mathf.Abs(inputX) > 0)
+            {
+                animator.Walk();
+            }
+            else
+            {
+                animator.Idle();
+            }
+        }
+
+        switch (inputX)
+        {   // Determine animation direction
+            case > 0:
+                animator.DirectionCheck(PlayerAnimator.Direction.Right);
+                break;
+            case < 0:
+                animator.DirectionCheck(PlayerAnimator.Direction.Left);
+                break;
+            default:
+                break;
+        }
+
+        return inputX * speed;
     }
 
     /// <summary>
@@ -141,8 +134,9 @@ public class PlayerMovement : MonoBehaviour
     /// </summary>
     void FixedUpdate()
     {
-        xMovement = HorizontalMovement();
         yMovement = VerticalMovement();
+        xMovement = HorizontalMovement();
+        
         speedVector = new Vector2(xMovement, yMovement);
 
         // Applies and resets the vector of speed
@@ -175,6 +169,7 @@ public class PlayerMovement : MonoBehaviour
         else
         {
             jumped = false;
+            animator.Idle();
         }
         grounded = n_grounded;
     }
