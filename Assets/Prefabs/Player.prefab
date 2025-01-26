@@ -53,9 +53,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 8
   jumpHeight: 0.4
-  airborneAcceleration: 0.01
-  acceleratedAirborneMovement: 0
-  activateMomentum: 0
+  animator: {fileID: 0}
+  rb: {fileID: 0}
+  speedVector: {x: 0, y: 0}
+  externalSpeedVector: {x: 0, y: 0}
+  inputX: 0
+  inputJump: 0
+  xMovement: 0
+  yMovement: 0
+  grounded: 0
+  jumped: 0
 --- !u!50 &864327371557319574
 Rigidbody2D:
   serializedVersion: 4
@@ -166,10 +173,10 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 955799291
+  m_SortingLayer: 3
   m_SortingOrder: 0
-  m_Sprite: {fileID: -1011525962, guid: 41b7b88f3f577f742b155f24acc95136, type: 3}
+  m_Sprite: {fileID: 363215775, guid: 9686a5f8854d04a47b42e695b211afcd, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

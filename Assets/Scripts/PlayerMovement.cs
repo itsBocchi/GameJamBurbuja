@@ -45,10 +45,6 @@ public class PlayerMovement : MonoBehaviour
         {
             Jump();
         }
-        else if (grounded && !jumped)
-        {
-            yMovement = 0f;
-        }
         else
         {
             yMovement = rb.velocity.y;
