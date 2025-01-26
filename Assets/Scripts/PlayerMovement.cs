@@ -37,7 +37,6 @@ public class PlayerMovement : MonoBehaviour
     /// <returns>Vertical speed</returns>
     float VerticalMovement()
     {
-        inputJump = Input.GetAxisRaw("Jump");
         if (inputJump > 0 && !jumped)
         {
             jumped = true;
@@ -46,10 +45,6 @@ public class PlayerMovement : MonoBehaviour
         if (grounded && jumped)
         {
             return Physics2D.gravity.y * -jumpHeight;
-        }
-        else if (grounded && !jumped)
-        {
-            return 0f;
         }
         else
         {
