@@ -36,6 +36,7 @@ public class PlayerMovement : MonoBehaviour
     /// </summary>
     private void VerticalMovement()
     {
+        inputJump = Input.GetAxisRaw("Jump");
         if (inputJump > 0 && !jumped)
         {
             jumped = true;
