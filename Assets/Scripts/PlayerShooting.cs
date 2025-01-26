@@ -10,16 +10,30 @@ public class PlayerShooting : MonoBehaviour
     private bool shooting = false;
     private Vector3 mousePos;
     private float angle;
+    private bool canShoot = true;
+    private BubbleInteract bubble = null;
+
+    // Singleton instance
+    [HideInInspector] public static PlayerShooting Instance;
+
+    void Awake()
+    {
+        if (Instance == null) Instance = this;
+    }
 
     // Called once per frame
     void Update()
     {
+        if (Input.GetButtonDown("Fire2") && bubble != null)
+        {
+            bubble.Burst();
+        }
         if (Input.GetButtonUp("Fire1") && shooting)
         {
             projectile.Expand();
             shooting = false;
         }
-        if (Input.GetButtonDown("Fire1") && !shooting)
+        if (Input.GetButtonDown("Fire1") && !shooting && canShoot)
         {
             // Rotation is extracted from parent
             // The 'z' angle compensates for the sprite's rotation
@@ -28,6 +42,17 @@ public class PlayerShooting : MonoBehaviour
             rotate = Quaternion.Euler(new Vector3(0, 0, angle));
             projectile = Instantiate(projectilePrefab, shooter.transform.position, rotate).GetComponent<Projectile>();
             shooting = true;
+            canShoot = false;
         }
+    }
+
+    public void RestoreBlood()
+    {
+        canShoot = true;
+    }
+
+    public void SetActiveBubble(BubbleInteract n_bubble)
+    {
+        bubble = n_bubble;
     }
 }

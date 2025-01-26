@@ -34,30 +34,33 @@ public class PlayerMovement : MonoBehaviour
     /// Method that determines the vertical speed of the
     /// character.
     /// </summary>
-    /// <returns>Vertical speed</returns>
-    float VerticalMovement()
+    private void VerticalMovement()
     {
         if (inputJump > 0 && !jumped)
         {
             jumped = true;
-            animator.Jump();
         }
         if (grounded && jumped)
         {
-            return Physics2D.gravity.y * -jumpHeight;
+            Jump();
         }
         else
         {
-            return rb.velocity.y;
+            yMovement = rb.velocity.y;
         }
+    }
+
+    private void Jump(float boost=1f)
+    {
+        animator.Jump();
+        yMovement = Physics2D.gravity.y * -jumpHeight * boost;
     }
 
     /// <summary>
     /// Method that determines the horizontal speed of the
     /// character.
     /// </summary>
-    /// <returns>Horizontal speed</returns>
-    float HorizontalMovement()
+    private void HorizontalMovement()
     {
         inputX = Input.GetAxisRaw("Horizontal");
         if (grounded && !jumped)
@@ -84,7 +87,7 @@ public class PlayerMovement : MonoBehaviour
                 break;
         }
 
-        return inputX * speed;
+        xMovement = inputX * speed;
     }
 
     /// <summary>
@@ -112,9 +115,10 @@ public class PlayerMovement : MonoBehaviour
     }
 
     // WIP
-    Vector2 BubbleJump()
+    public void BubbleJump()
     {
-        return Vector2.zero;
+        Jump(1.5f);
+        rb.velocity = new Vector2(rb.velocity.x, yMovement);
     }
 
     /// <summary>
@@ -126,10 +130,8 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        yMovement = VerticalMovement();
-        xMovement = HorizontalMovement();
-        yMovement = VerticalMovement();
-        inputJump = Input.GetAxisRaw("Jump");
+        VerticalMovement();
+        HorizontalMovement();
     }
 
     void FixedUpdate()
@@ -162,7 +164,11 @@ public class PlayerMovement : MonoBehaviour
         if (n_grounded)
         {
             jumped = false;
-            animator.Idle();
+            animator.SetBool("TouchingGround", true);
+        }
+        else
+        {
+            animator.SetBool("TouchingGround", false);
         }
         grounded = n_grounded;
     }

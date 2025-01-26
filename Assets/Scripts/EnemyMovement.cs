@@ -1,8 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyMovement : MonoBehaviour
+public class EnemyMovement : BubbleInteractable
 {
     [SerializeField] private float speed = 4f;
     [SerializeField] private Transform[] waypoints;
@@ -19,8 +17,10 @@ public class EnemyMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Patrol();
-
+        if (!isInBubble)
+        {
+            Patrol();
+        }
     }
 
     void Patrol()
@@ -48,5 +48,15 @@ public class EnemyMovement : MonoBehaviour
                 currentWaypointIndex = 0;
             }
         }
+    }
+
+    public override void BubbleInteraction()
+    {
+        isInBubble = true;
+    }
+
+    public override void BubbleBurst()
+    {
+        isInBubble = false;
     }
 }
