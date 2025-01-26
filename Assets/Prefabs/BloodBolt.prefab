@@ -123,6 +123,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   baseSpeed: 8
   bubblePrefab: {fileID: 3932207220676118023, guid: 974c964f9b3f80545b4a0c9c47477478, type: 3}
+  homingSpeedFactor: 1
+  homing: 0
 --- !u!50 &2610101179203928675
 Rigidbody2D:
   serializedVersion: 4
