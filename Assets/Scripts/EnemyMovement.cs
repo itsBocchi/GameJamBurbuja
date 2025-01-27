@@ -57,13 +57,14 @@ public class EnemyMovement : BubbleInteractable
 
     public override void BubbleInteraction()
     {
+        base.BubbleInteraction();
         isInBubble = true;
         animator.SetBool("InBubble", isInBubble);
     }
 
-    public override void BubbleBurst()
+    public override void Burst()
     {
-
+        base.Burst();
         isInBubble = false;
         animator.SetBool("InBubble", isInBubble);
     }

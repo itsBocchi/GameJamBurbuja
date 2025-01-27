@@ -1,12 +1,8 @@
 using UnityEngine;
 
-public class BubbleInteract : MonoBehaviour
+public class BubbleEntity : Bubble
 {
-    // Tweakable variables
-    [SerializeField] private GameObject projectilePrefab;
-
     // Private variables
-    private Projectile projectile;
     private bool expanded = false;
 
     private void Awake()
@@ -37,10 +33,9 @@ public class BubbleInteract : MonoBehaviour
         expanded = true;
     }
 
-    public void Burst()
+    public override void Burst()
     {
+        base.Burst();
         Destroy(gameObject);
-        projectile = Instantiate(projectilePrefab, gameObject.transform.position, Quaternion.identity).GetComponent<Projectile>();
-        projectile.homingPlayer = true;
     }
 }

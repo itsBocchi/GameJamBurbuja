@@ -1,8 +1,7 @@
-using UnityEngine;
-
-public abstract class BubbleInteractable : MonoBehaviour
+public abstract class BubbleInteractable : Bubble
 {
-    public abstract void BubbleInteraction();
-
-    public abstract void BubbleBurst();
+    public virtual void BubbleInteraction()
+    {
+        PlayerShooting.Instance.SetActiveBubble(this);
+    }
 }

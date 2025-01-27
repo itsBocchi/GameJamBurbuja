@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -45,7 +46,11 @@ public class PlayerMovement : MonoBehaviour
         {
             Jump();
         }
-        else
+        else if (grounded && !jumped)
+        {
+            yMovement = 0;
+        }
+        else if (!grounded)
         {
             yMovement = rb.velocity.y;
         }
@@ -119,15 +124,15 @@ public class PlayerMovement : MonoBehaviour
     /// </summary>
     /// <param name="speedVector"></param>
     /// <returns></returns>
-    public void ExternalMovement(Vector2 addedSpeed)
+    public void ExternalMovement(Vector2 n_speed)
     {
-        externalSpeedVector += addedSpeed;
+        externalSpeedVector = n_speed;
     }
 
     // WIP
     public void BubbleJump()
     {
-        Jump(1.5f);
+        Jump(1f);
         rb.velocity = new Vector2(rb.velocity.x, yMovement);
     }
 
@@ -151,7 +156,6 @@ public class PlayerMovement : MonoBehaviour
         // Applies and resets the vector of speed
         rb.velocity = speedVector + externalSpeedVector;
         externalSpeedVector = Vector2.zero;
-        
     }
 
     /// <summary>
@@ -171,7 +175,8 @@ public class PlayerMovement : MonoBehaviour
     /// <param name="n_speed">New speed multiplier.</param>
     public void ChangeGrounded(bool n_grounded)
     {
-        if (n_grounded)
+        grounded = n_grounded;
+        if (grounded)
         {
             jumped = false;
             animator.SetBool("TouchingGround", true);
@@ -180,6 +185,5 @@ public class PlayerMovement : MonoBehaviour
         {
             animator.SetBool("TouchingGround", false);
         }
-        grounded = n_grounded;
     }
 }
