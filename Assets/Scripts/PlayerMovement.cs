@@ -54,6 +54,15 @@ public class PlayerMovement : MonoBehaviour
         {
             yMovement = rb.velocity.y;
         }
+        if (rb.velocity.y < 0)
+        {
+            Fall();
+        }
+    }
+
+    private void Fall()
+    {
+        animator.Fall();
     }
 
     private void Jump(float boost=1f)
@@ -75,7 +84,7 @@ public class PlayerMovement : MonoBehaviour
             {
                 animator.Walk();
             }
-            else
+            else if (grounded)
             {
                 animator.Idle();
             }
