@@ -11,7 +11,7 @@ public class PlayerShooting : MonoBehaviour
     private Vector3 mousePos;
     private float angle;
     private bool canShoot = true;
-    private BubbleInteract bubble = null;
+    private Bubble bubble = null;
 
     // Singleton instance
     [HideInInspector] public static PlayerShooting Instance;
@@ -27,6 +27,7 @@ public class PlayerShooting : MonoBehaviour
         if (Input.GetButtonDown("Fire2") && bubble != null)
         {
             bubble.Burst();
+            bubble = null;
         }
         if (Input.GetButtonUp("Fire1") && shooting)
         {
@@ -51,7 +52,7 @@ public class PlayerShooting : MonoBehaviour
         canShoot = true;
     }
 
-    public void SetActiveBubble(BubbleInteract n_bubble)
+    public void SetActiveBubble(Bubble n_bubble)
     {
         bubble = n_bubble;
     }
