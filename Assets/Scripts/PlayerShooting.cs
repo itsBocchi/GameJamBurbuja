@@ -11,7 +11,7 @@ public class PlayerShooting : MonoBehaviour
     private Vector3 mousePos;
     private float angle;
     private bool canShoot = true;
-    private BubbleInteract bubble = null;
+    private Bubble bubble = null;
     private Animator animator;
 
     // Singleton instance
