@@ -67,4 +67,12 @@ public class EnemyMovement : BubbleInteractable
         animator.SetBool("InBubble", isInBubble);
     }
 
+    void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.tag == "Player" && isInBubble)
+        {
+            collision.gameObject.GetComponent<PlayerMovement>().GargoyleJump();
+            Burst();
+        }
+    }
 }
