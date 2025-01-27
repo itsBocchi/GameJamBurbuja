@@ -7,7 +7,6 @@ public class EnemyMovement : BubbleInteractable
     [SerializeField] private Animator animator;
     private SpriteRenderer spriteRenderer;
     private int currentWaypointIndex = 0;
-    private Collider2D collider;
 
     public bool isFlying = true;
     public bool isInBubble = false;
@@ -16,7 +15,6 @@ public class EnemyMovement : BubbleInteractable
     {
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
-        collider = GetComponent<Collider2D>();
     }
 
     // Update is called once per frame
