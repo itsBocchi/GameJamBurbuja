@@ -6,6 +6,8 @@ public class PlayerMovement : MonoBehaviour
     // Tweakable variables
     [SerializeField] private float speed = 4f;
     [SerializeField] private float jumpHeight = 0.5f;
+    [SerializeField] private float bubbleJumpHeight = 1f;
+    [SerializeField] private float gargoyleJumpHeight = 2f;
 
     // Private variables
     [SerializeField] private PlayerAnimator animator;
@@ -132,9 +134,16 @@ public class PlayerMovement : MonoBehaviour
     // WIP
     public void BubbleJump()
     {
-        Jump(1f);
+        Jump(bubbleJumpHeight);
         rb.velocity = new Vector2(rb.velocity.x, yMovement);
     }
+
+    public void GargoyleJump()
+    {
+        Jump(gargoyleJumpHeight);
+        rb.velocity = new Vector2(rb.velocity.x, yMovement);
+    }
+
 
     /// <summary>
     /// Called once every 0.02 seconds.<br></br><br></br>
