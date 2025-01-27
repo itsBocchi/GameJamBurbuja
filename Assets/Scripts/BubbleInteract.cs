@@ -18,8 +18,8 @@ public class BubbleInteract : MonoBehaviour
     {
         if (collision.tag == "Bubblable")
         {
-            Destroy(gameObject);
             collision.gameObject.GetComponent<BubbleInteractable>().BubbleInteraction();
+            Destroy(gameObject);
         }
     }
 
