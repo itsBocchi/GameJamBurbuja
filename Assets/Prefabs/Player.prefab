@@ -53,7 +53,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 8
-  jumpHeight: 0.4
+  jumpHeight: 0.5
   bubbleJumpHeight: 1
   gargoyleJumpHeight: 2
   animator: {fileID: 0}

@@ -7,7 +7,14 @@ public class MNG_Gamestate : MonoBehaviour
     private bool isPaused = false;
     private bool isPressed = false;
     private float input;
-        
+
+    [HideInInspector] public static MNG_Gamestate Instance;
+
+    void Awake()
+    {
+        if (Instance == null) Instance = this;
+    }
+
     private void Update()
     {
         input = Input.GetAxisRaw("Cancel");

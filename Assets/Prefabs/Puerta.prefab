@@ -11,9 +11,10 @@ GameObject:
   - component: {fileID: 9178672159942493301}
   - component: {fileID: 4813025205826774969}
   - component: {fileID: 7950042616935569520}
+  - component: {fileID: 334665155269195884}
   m_Layer: 0
   m_Name: Puerta
-  m_TagString: Untagged
+  m_TagString: Goal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -130,3 +131,17 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.375, y: 2}
   m_EdgeRadius: 0
+--- !u!114 &334665155269195884
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 226408825697660128}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6aa5580aa22f9eb4eae435dd07905dc0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _VictoryScreen: {fileID: 0}
+  _Win: 0
