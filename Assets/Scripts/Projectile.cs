@@ -38,7 +38,7 @@ public class Projectile : MonoBehaviour
             angle = Mathf.Atan2(transform.position.y - mousePos.y, transform.position.x - mousePos.x) * Mathf.Rad2Deg + 180;
         }
         transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
-        rb.velocity = transform.right * baseSpeed * homingSpeedFactor;
+        rb.velocity = transform.right * baseSpeed * (homingPlayer ? homingSpeedFactor : 1);
     }
 
     public void Expand()

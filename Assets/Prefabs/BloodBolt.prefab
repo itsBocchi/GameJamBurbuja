@@ -121,9 +121,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99712878c117a254daecdd46f85bc0c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseSpeed: 8
+  baseSpeed: 10
   bubblePrefab: {fileID: 3932207220676118023, guid: 974c964f9b3f80545b4a0c9c47477478, type: 3}
-  homingSpeedFactor: 1
+  homingSpeedFactor: 2
   homingPlayer: 0
 --- !u!50 &2610101179203928675
 Rigidbody2D:

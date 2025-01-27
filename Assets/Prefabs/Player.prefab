@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 2377239132581746981}
   - component: {fileID: 1382628879573331341}
   - component: {fileID: 4180626617622126359}
+  - component: {fileID: 3237758651376413484}
   m_Layer: 3
   m_Name: Player
   m_TagString: Player
@@ -52,7 +53,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 8
-  jumpHeight: 0.6
+  jumpHeight: 0.4
+  bubbleJumpHeight: 1
+  gargoyleJumpHeight: 2
   animator: {fileID: 0}
   rb: {fileID: 0}
   speedVector: {x: 0, y: 0}
@@ -235,6 +238,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shooter: {fileID: 2482196314748809036}
   projectilePrefab: {fileID: 618559050853359027, guid: f2faf271f1aebdb45a02a06292f4bc0b, type: 3}
+--- !u!114 &3237758651376413484
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1976142701143127506}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5938858412e52046b6a96d07bcb46b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _PauseMenu: {fileID: 0}
 --- !u!1 &4227036733537021314
 GameObject:
   m_ObjectHideFlags: 0
