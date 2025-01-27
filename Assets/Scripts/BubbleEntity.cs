@@ -35,6 +35,11 @@ public class BubbleEntity : Bubble
 
     public override void Burst()
     {
+        gameObject.GetComponent<Animator>().SetTrigger("Burst");
+    }
+
+    public void BurstAftermath()
+    {
         base.Burst();
         Destroy(gameObject);
     }
