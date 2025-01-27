@@ -5,6 +5,6 @@ public class Menu : MonoBehaviour
 {
     public void StartNewGame()
     {
-        SceneManager.LoadScene("TestChamber");
+        SceneManager.LoadScene("Test2");
     }
 }
