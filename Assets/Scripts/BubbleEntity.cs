@@ -14,8 +14,8 @@ public class BubbleEntity : Bubble
     {
         if (collision.tag == "Bubblable")
         {
-            Destroy(gameObject);
             collision.gameObject.GetComponent<BubbleInteractable>().BubbleInteraction();
+            Destroy(gameObject);
         }
     }
 

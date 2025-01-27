@@ -4,14 +4,19 @@ public class EnemyMovement : BubbleInteractable
 {
     [SerializeField] private float speed = 4f;
     [SerializeField] private Transform[] waypoints;
+    [SerializeField] private Animator animator;
     private SpriteRenderer spriteRenderer;
     private int currentWaypointIndex = 0;
+    private Collider2D collider;
 
+    public bool isFlying = true;
     public bool isInBubble = false;
 
-    void Start()
+    void Awake()
     {
+        animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        collider = GetComponent<Collider2D>();
     }
 
     // Update is called once per frame
@@ -54,11 +59,14 @@ public class EnemyMovement : BubbleInteractable
     {
         base.BubbleInteraction();
         isInBubble = true;
+        animator.SetBool("InBubble", isInBubble);
     }
 
     public override void Burst()
     {
         base.Burst();
         isInBubble = false;
+        animator.SetBool("InBubble", isInBubble);
     }
+
 }
